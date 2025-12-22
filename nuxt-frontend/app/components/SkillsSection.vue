@@ -129,13 +129,17 @@ const skillsByRole = computed(() => ({
                    hover:shadow-lg hover:scale-105 hover:-translate-y-1
                    transition-all duration-200 ease-out cursor-pointer"
           >
-            <NuxtImg
-              v-if="skill.icon"
-              :src="mediaUrl(skill.icon)"
-              :alt="skill.name"
-              loading="lazy"
-              class="w-10 h-10 object-contain"
-            />
+          <NuxtImg
+            v-if="skill.icon"
+            provider="strapi"
+            :src="skill.icon.url"
+            :alt="skill.name"
+            sizes="40px"
+            format="webp"
+            quality="90"
+            loading="lazy"
+            class="w-10 h-10 object-contain"
+          />
             <span class="text-slate-900 dark:text-slate-100">
               {{ skill.name }}
             </span>

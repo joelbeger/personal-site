@@ -54,16 +54,18 @@ const { parseMarkdown } = useMarkdown()
         <!-- Image - order-1 on mobile (shows first), order-2 on desktop -->
         <div v-if="homepage.heroImage" class="justify-self-center order-1 md:order-2">
           <NuxtImg
-            :src="mediaUrl(homepage.heroImage)"
+            provider="strapi"
+            :src="homepage.heroImage.url"
             :alt="homepage.heroImage.alternativeText || homepage.heroTitle"
             class="w-80 h-80 rounded-full object-cover shadow-xl
-                   border border-slate-200 dark:border-slate-700"
-                   fetchpriority="high"
-                    loading="eager"
-                    width="320"
-                    height="320"
-                    format="webp"
-                    quality="85"
+                  border border-slate-200 dark:border-slate-700"
+            fetchpriority="high"
+            loading="eager"
+            width="320"
+            height="320"
+            sizes="(max-width: 480px) 280px, 320px"
+            format="webp"
+            quality="90"
           />
         </div>
       </div>

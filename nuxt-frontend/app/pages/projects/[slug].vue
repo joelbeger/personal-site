@@ -74,26 +74,31 @@ watchEffect(() => {
             :key="skill.id"
             class="flex items-center gap-2 text-xs px-3 py-2 rounded-full bg-slate-100 dark:bg-slate-700"
           >
-            <NuxtImg
-              v-if="skill.icon"
-              loading="lazy"
-              :src="mediaUrl(skill.icon)"
-              :alt="skill.name"
-              class="h-8 w-8 object-contain"
-            />
+          <NuxtImg
+            v-if="skill.icon"
+            provider="strapi"
+            :src="skill.icon.url"
+            :alt="skill.name"
+            sizes="32px"
+            format="webp"
+            quality="90"
+            loading="lazy"
+            class="h-8 w-8 object-contain"
+          />
             <span class="text-base text-neutral-500 dark:text-neutral-300" >{{ skill.name }}</span>
           </div>
         </div>
       </section>
-
       <NuxtImg
         v-if="project.thumbnail"
-        :src="mediaUrl(project.thumbnail)"
+        provider="strapi"
+        :src="project.thumbnail.url"
         :alt="project.title"
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        format="webp"
         loading="lazy"
         class="w-full rounded-xl border border-slate-200 dark:border-slate-600"
       />
-
       <div class="prose dark:prose-invert max-w-none">
         <!-- Use v-html if description contains HTML, or whitespace-pre-line if plain text -->
         <div 

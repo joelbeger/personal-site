@@ -50,6 +50,7 @@ const shouldRenderProject = (index: number) => {
 }
 
 // Drag handlers
+// Drag handlers
 const handleDragStart = (e: TouchEvent | MouseEvent) => {
   if (!isTouchEvent(e)) return
   
@@ -70,8 +71,8 @@ const handleDragMove = (e: TouchEvent | MouseEvent) => {
   const currentX = touch.clientX
   const deltaX = currentX - startX.value
   
-  const maxRotation = step.value
-  const dragRotation = Math.max(-maxRotation, Math.min(maxRotation, deltaX * 0.5))
+  // Apply drag with some resistance, but don't limit it
+  const dragRotation = deltaX * 0.3 // Reduced multiplier for more control
   rotation.value = startRotation.value + dragRotation
 }
 
@@ -84,15 +85,18 @@ const handleDragEnd = (e: TouchEvent | MouseEvent) => {
   const endX = touch.clientX
   const deltaX = endX - startX.value
   
+  // Determine direction and navigate
   if (Math.abs(deltaX) > dragThreshold) {
     if (deltaX > 0) {
       prev()
     } else {
       next()
     }
-  } else {
-    rotation.value = currentIndex.value * -step.value
   }
+  
+  // CRITICAL: Always snap to the current index position
+  // This ensures we're never "between" slides
+  rotation.value = currentIndex.value * -step.value
   
   isDragging.value = false
 }
@@ -179,33 +183,39 @@ onMounted(() => {
                 class="image-container block focus:outline-none focus:ring-2 focus:ring-slate-500 rounded overflow-hidden border-2 border-slate-50 dark:border-slate-400 pointer-events-auto"
                 :tabindex="0"
               >
-                <NuxtImg
-                  v-if="project.thumbnail"
-                  :src="mediaUrl(project.thumbnail)"
-                  :alt="project.title"
-                  width="630"
-                  height="440"
-                  :loading="index === 0 ? 'eager' : 'lazy'"
-                  class="project-image"
-                  draggable="false"
-                />
+              <NuxtImg
+                v-if="project.thumbnail"
+                provider="strapi"
+                :src="project.thumbnail.url"
+                :alt="project.title"
+                width="630"
+                height="440"
+                sizes="(max-width: 480px) 320px, (max-width: 768px) 360px, 630px"
+                format="webp"
+                :loading="index === 0 ? 'eager' : 'lazy'"
+                class="project-image"
+                draggable="false"
+              />
               </NuxtLink>
               <div
                 v-else
                 class="image-container block rounded overflow-hidden border-2 border-slate-50 dark:border-slate-400 cursor-pointer pointer-events-auto"
                 @contextmenu.prevent
               >
-                <NuxtImg
-                  v-if="project.thumbnail"
-                  :src="mediaUrl(project.thumbnail)"
-                  :alt="project.title"
-                  width="630"
-                  height="440"
-                  loading="lazy"
-                  class="project-image"
-                  draggable="false"
-                  @contextmenu.prevent
-                />
+              <NuxtImg
+                v-if="project.thumbnail"
+                provider="strapi"
+                :src="project.thumbnail.url"
+                :alt="project.title"
+                width="630"
+                height="440"
+                sizes="(max-width: 480px) 320px, (max-width: 768px) 360px, 630px"
+                format="webp"
+                loading="lazy"
+                class="project-image"
+                draggable="false"
+                @contextmenu.prevent
+              />
               </div>
             </div>
           </figure>
@@ -246,14 +256,18 @@ onMounted(() => {
                   class="skill-icon flex flex-col items-center gap-1"
                 >
                   <div class="h-14 w-14 rounded-lg dark:bg-neutral-200 border border-neutral-300 dark:border-neutral-500 bg-neutral-50 p-2 flex items-center justify-center">
-                    <NuxtImg
-                      :src="mediaUrl(skill.icon)"
-                      :alt="skill.name || ''"
-                      loading="lazy"
-                      class="w-full h-full object-contain"
-                      style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;"
-                      draggable="false"
-                    />
+                <NuxtImg
+                  provider="strapi"
+                  :src="skill.icon.url"
+                  :alt="skill.name || ''"
+                  sizes="56px"
+                  format="webp"
+                  loading="lazy"
+                  quality="90"
+                  class="w-full h-full object-contain"
+                  style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;"
+                  draggable="false"
+                />
                   </div>
                   <span class="text-[10px] text-neutral-50 dark:text-slate-300 text-center">
                     {{ skill.name }}

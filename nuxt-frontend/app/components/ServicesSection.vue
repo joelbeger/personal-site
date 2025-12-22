@@ -39,10 +39,14 @@ const props = defineProps<{
                 shadow-sm"
         >
         <NuxtImg
-            :src="mediaUrl(service.icon)"
-            :alt="service.title"
-            loading="lazy"
-            class="w-full h-full object-contain"
+          provider="strapi"
+          :src="service.icon.url"
+          :alt="service.title"
+          sizes="80px"
+          format="webp"
+          quality="90"
+          loading="lazy"
+          class="w-full h-full object-contain"
         />
         </div>
 

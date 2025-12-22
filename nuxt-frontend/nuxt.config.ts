@@ -51,11 +51,15 @@ export default defineNuxtConfig({
         '/api/__sitemap__/urls'
       ]
   },
-
+   image: {
+    strapi: {
+      baseURL: process.env.NUXT_PUBLIC_STRAPI_URL || 'https://api.joelbeger.com'
+    }
+  },
   runtimeConfig: {
     public: {
-      strapiUrl: process.env.STRAPI_URL || 'http://164.90.136.196',
-      siteUrl: process.env.SITE_URL || 'http://localhost:3000', // Change to your production domain when deploying
+      strapiUrl: process.env.STRAPI_URL || 'https://api.joelbeger.com',
+      siteUrl: process.env.SITE_URL || 'https://joelbeger.com', // Change to your production domain when deploying
     },
   },
 })
