@@ -162,8 +162,8 @@ onMounted(() => {
       >
         <div class="carousel" :style="carouselStyle">
           <figure
-            v-if="shouldRenderProject(index)"
-            v-for="(project, index) in projects"
+              v-for="(project, index) in projects"
+  v-show="shouldRenderProject(index)"
             :key="project.id"
             :style="figureStyle(index)"
             :class="{ show: index === currentIndex }"

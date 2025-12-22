@@ -1,11 +1,20 @@
+# Dependencies
 node_modules/
+
+# Nuxt build output
 .nuxt/
 .output/
 dist/
+
+# Strapi runtime / generated
 strapi-backend/.tmp/
 strapi-backend/build/
 strapi-backend/.cache/
 strapi-backend/public/uploads/
+
+# Env files
 .env
 .env.*
+
+# OS
 .DS_Store

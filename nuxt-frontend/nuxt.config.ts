@@ -54,7 +54,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      strapiUrl: process.env.STRAPI_URL || 'http://localhost:1337',
+      strapiUrl: process.env.STRAPI_URL || 'http://164.90.136.196',
       siteUrl: process.env.SITE_URL || 'http://localhost:3000', // Change to your production domain when deploying
     },
   },
