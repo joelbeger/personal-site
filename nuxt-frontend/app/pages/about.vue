@@ -48,7 +48,7 @@ setPageSeo({
         About Joel Beger
       </h1>
 
-      <div class="grid gap-10 md:grid-cols-[2fr,3fr] items-start">
+      <div class="grid gap-10 md:grid-cols-2 items-start">
         <!-- Photo -->
         <div class="justify-self-center">
           <NuxtImg
@@ -112,8 +112,8 @@ setPageSeo({
             v-for="skill in skills"
             :key="skill.id"
             class="flex items-center gap-2 px-4 py-2.5 rounded-full
-                   bg-white/5 dark:bg-slate-800/30
-                   border border-slate-200/20 dark:border-slate-700/30"
+                   bg-white dark:bg-neutral-600
+                   border border-slate-200 dark:border-slate-500"
           >
             <NuxtImg
               v-if="skill.icon"
@@ -126,7 +126,7 @@ setPageSeo({
               loading="lazy"
               class="h-6 w-6 object-contain"
             />
-            <span class="text-sm text-slate-100 dark:text-slate-300">{{ skill.name }}</span>
+            <span class="text-sm text-slate-900 dark:text-slate-100">{{ skill.name }}</span>
           </div>
         </div>
       </div>
