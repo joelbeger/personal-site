@@ -84,25 +84,51 @@ const scrollToSection = (id: string) => {
 
       <!-- Desktop nav -->
       <nav class="hidden md:flex items-center gap-4 md:gap-6 text-sm" aria-label="Main navigation">
-        
-        <a v-for="item in [
-            { id: 'top', label: 'About me' },
-            { id: 'projects', label: 'Projects' },
-            { id: 'skills', label: 'Skills' },
-            { id: 'contact', label: 'Contact me' }
-          ]"
-          :key="item.id"
-          :href="`#${item.id}`"
+
+        <NuxtLink
+          to="/about"
           class="text-xl transition-opacity hover:opacity-80"
           :class="[
             isScrolled
               ? 'text-slate-900 dark:text-slate-200'
               : 'text-slate-50 dark:text-slate-50'
           ]"
-          @click.prevent="scrollToSection(item.id)"
         >
-          {{ item.label }}
-        </a>
+          About
+        </NuxtLink>
+        <NuxtLink
+          to="/services"
+          class="text-xl transition-opacity hover:opacity-80"
+          :class="[
+            isScrolled
+              ? 'text-slate-900 dark:text-slate-200'
+              : 'text-slate-50 dark:text-slate-50'
+          ]"
+        >
+          Services
+        </NuxtLink>
+        <NuxtLink
+          to="/projects"
+          class="text-xl transition-opacity hover:opacity-80"
+          :class="[
+            isScrolled
+              ? 'text-slate-900 dark:text-slate-200'
+              : 'text-slate-50 dark:text-slate-50'
+          ]"
+        >
+          Projects
+        </NuxtLink>
+        <NuxtLink
+          to="/contact"
+          class="text-xl transition-opacity hover:opacity-80"
+          :class="[
+            isScrolled
+              ? 'text-slate-900 dark:text-slate-200'
+              : 'text-slate-50 dark:text-slate-50'
+          ]"
+        >
+          Contact
+        </NuxtLink>
 
         <!-- Desktop theme toggle -->
         <div class="relative">
@@ -211,19 +237,34 @@ const scrollToSection = (id: string) => {
 
               <nav class="flex flex-col p-6 pt-16 gap-6" aria-label="Mobile navigation">
                 
-                 <a v-for="item in [
-                    { id: 'top', label: 'About me' },
-                    { id: 'projects', label: 'Projects' },
-                    { id: 'skills', label: 'Skills' },
-                    { id: 'contact', label: 'Contact me' }
-                  ]"
-                  :key="item.id"
-                  :href="`#${item.id}`"
+                <NuxtLink
+                  to="/about"
                   class="text-xl font-medium text-slate-900 dark:text-slate-200"
-                  @click.prevent="scrollToSection(item.id)"
+                  @click="closeMobileMenu"
                 >
-                  {{ item.label }}
-                </a>
+                  About
+                </NuxtLink>
+                <NuxtLink
+                  to="/services"
+                  class="text-xl font-medium text-slate-900 dark:text-slate-200"
+                  @click="closeMobileMenu"
+                >
+                  Services
+                </NuxtLink>
+                <NuxtLink
+                  to="/projects"
+                  class="text-xl font-medium text-slate-900 dark:text-slate-200"
+                  @click="closeMobileMenu"
+                >
+                  Projects
+                </NuxtLink>
+                <NuxtLink
+                  to="/contact"
+                  class="text-xl font-medium text-slate-900 dark:text-slate-200"
+                  @click="closeMobileMenu"
+                >
+                  Contact
+                </NuxtLink>
 
                 <!-- Mobile theme toggle -->
                 <button

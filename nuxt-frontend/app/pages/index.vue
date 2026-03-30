@@ -9,7 +9,19 @@ const { setPageSeo } = useSeo()
 setPageSeo({
   title: 'Joel Beger | Frontend Developer & Web Engineer',
   description: 'Joel Beger is a full-stack engineer specializing in high-impact frontend work. Building custom websites and ecommerce sites across Shopify, HubSpot, Webflow, and WordPress with expertise in performance, CRO, and SEO.',
-  path: '/'
+  path: '/',
+  jsonLd: {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Joel Beger',
+    url: 'https://joelbeger.com',
+    jobTitle: 'Frontend Developer & Web Engineer',
+    description: 'Full-stack engineer specializing in high-impact frontend work. Building custom websites and ecommerce sites across Shopify, HubSpot, Webflow, and WordPress.',
+    sameAs: [
+      'https://www.linkedin.com/in/jtbeger/'
+    ],
+    knowsAbout: ['React', 'Vue', 'Nuxt', 'Shopify', 'HubSpot', 'Webflow', 'WordPress', 'SEO', 'CRO', 'Web Performance'],
+  }
 })
 
 const mediaUrl = (img: { url: string } | null | undefined) =>

@@ -6,23 +6,42 @@
         <p class="text-sm text-slate-600 dark:text-slate-400">
           © 2025 Joel Beger. Built with Nuxt 4 & Strapi.
         </p>
-        
-        <!-- Social/Contact Links -->
-        <div class="flex gap-6">
-          <a 
-            href="https://www.linkedin.com/in/jtbeger/" 
+
+        <!-- Site Links -->
+        <nav class="flex flex-wrap justify-center gap-6" aria-label="Footer navigation">
+          <NuxtLink
+            to="/about"
+            class="text-sm text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200 transition-colors"
+          >
+            About Joel Beger
+          </NuxtLink>
+          <NuxtLink
+            to="/projects"
+            class="text-sm text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200 transition-colors"
+          >
+            Projects
+          </NuxtLink>
+          <NuxtLink
+            to="/services"
+            class="text-sm text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200 transition-colors"
+          >
+            Services
+          </NuxtLink>
+          <NuxtLink
+            to="/contact"
+            class="text-sm text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200 transition-colors"
+          >
+            Contact
+          </NuxtLink>
+          <a
+            href="https://www.linkedin.com/in/jtbeger/"
             target="_blank"
+            rel="noopener noreferrer"
             class="text-sm text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200 transition-colors"
           >
             LinkedIn
           </a>
-          <a 
-            href="jtbeger@email.com"
-            class="text-sm text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200 transition-colors"
-          >
-            Email
-          </a>
-        </div>
+        </nav>
       </div>
     </div>
   </footer>

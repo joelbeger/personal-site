@@ -4,7 +4,7 @@ import type { Project } from '~/types/strapi'
 const route = useRoute()
 const config = useRuntimeConfig()
 const { parseMarkdown } = useMarkdown()
-const { setPageSeo } = useSeo()
+const { setPageSeo, baseUrl } = useSeo()
 
 const mediaUrl = (img: { url: string } | null | undefined) =>
   img?.url ? `${config.public.strapiUrl}${img.url}` : ''
@@ -28,11 +28,25 @@ const project = computed(() => projectRes.value?.data?.[0] ?? null)
 
 watchEffect(() => {
   if (project.value) {
+    const desc = project.value.shortDescription || project.value.description?.substring(0, 140) || ''
     setPageSeo({
-      title: `${project.value.title} | Joel Beger`,
-      description: project.value.description?.substring(0, 160) || project.value.shortDescription,
+      title: `${project.value.title} — Joel Beger's Portfolio`,
+      description: `${desc} — A project by Joel Beger, frontend developer and web engineer.`,
       image: mediaUrl(project.value.thumbnail),
-      path: `/projects/${project.value.slug}`
+      path: `/projects/${project.value.slug}`,
+      jsonLd: {
+        '@context': 'https://schema.org',
+        '@type': 'CreativeWork',
+        name: project.value.title,
+        description: desc,
+        url: `${baseUrl}/projects/${project.value.slug}`,
+        author: {
+          '@type': 'Person',
+          name: 'Joel Beger',
+          url: 'https://joelbeger.com',
+        },
+        ...(project.value.thumbnail ? { image: mediaUrl(project.value.thumbnail) } : {}),
+      }
     })
   }
 })
@@ -142,10 +156,12 @@ watchEffect(() => {
             <button
         type="button"
         class="text-sm text-slate-700 dark:text-slate-300 mb-4"
-        @click="$router.push('/#projects')"
+        @click="$router.push('/projects')"
       >
         ← Back to projects
       </button>
+
+      <CtaSection />
     </article>
   </main>
 </template>

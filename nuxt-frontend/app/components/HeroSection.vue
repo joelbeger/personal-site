@@ -48,6 +48,18 @@ const { parseMarkdown } = useMarkdown()
               </span>
               <NuxtImg src="/icons/linkedin.png"  alt="" class="w-6 h-6" />
             </a>
+            <NuxtLink
+              to="/about"
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-lg
+                    bg-slate-600 hover:bg-slate-500
+                    dark:bg-slate-500 dark:hover:bg-slate-400
+                    transition-all duration-300 ease-out
+                    hover:scale-105 shadow-md hover:shadow-lg"
+            >
+              <span class="text-white font-medium">
+                Learn More
+              </span>
+            </NuxtLink>
           </div>
         </div>
 

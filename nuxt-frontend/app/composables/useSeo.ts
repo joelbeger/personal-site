@@ -1,17 +1,18 @@
 export const useSeo = () => {
   const config = useRuntimeConfig()
-  const baseUrl = config.public.siteUrl || 'https://joelbeger.com' // Add your domain
+  const baseUrl = config.public.siteUrl || 'https://joelbeger.com'
 
   const setPageSeo = (options: {
     title: string
     description: string
     image?: string
     path?: string
+    jsonLd?: Record<string, any>
   }) => {
-    const { title, description, image, path = '' } = options
+    const { title, description, image, path = '', jsonLd } = options
     const fullTitle = title.includes('Joel Beger') ? title : `${title} | Joel Beger`
     const url = `${baseUrl}${path}`
-    const ogImage = image || `${baseUrl}/og-image.png` // Create a default OG image
+    const ogImage = image || `${baseUrl}/og-image.png`
 
     useSeoMeta({
       title: fullTitle,
@@ -26,12 +27,23 @@ export const useSeo = () => {
       twitterImage: ogImage,
     })
 
-    useHead({
+    const headConfig: Record<string, any> = {
       link: [
         { rel: 'canonical', href: url }
       ]
-    })
+    }
+
+    if (jsonLd) {
+      headConfig.script = [
+        {
+          type: 'application/ld+json',
+          innerHTML: JSON.stringify(jsonLd),
+        }
+      ]
+    }
+
+    useHead(headConfig)
   }
 
-  return { setPageSeo }
+  return { setPageSeo, baseUrl }
 }
